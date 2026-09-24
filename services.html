@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Anne's Autobiography</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+
+    <style>
+
+        html {
+            min-height: 100%;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            background-image: url("photos/wow.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="header">
+
+            <div class="header-Left">
+
+                <a href="index.html" class="logo">
+                    photobooth
+                </a>
+
+            </div>
+
+
+            <div class="header-Right">
+
+                <a class="active" href="services.html">
+                    photobooth
+                </a>
+
+                <a href="about.html">
+                    about me
+                </a>
+
+                <a href="index.html">
+                    home
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- PHOTOBOOTH -->
+
+<section style="
+    text-align: center;
+    padding: 60px 20px;
+    background-color: transparent;
+    min-height: 700px;
+">
+
+    <!-- PHOTOBOOTH BOX -->
+
+    <div style="
+        display: inline-block;
+        background-color: #ffffff;
+        padding: 40px 60px;
+        border-radius: 30px;
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
+    ">
+
+
+        <!-- TITLE -->
+
+        <h1 class="font1" style="
+            color: #f6c8dd;
+            font-size: 40px;
+            margin-top: 0;
+        ">
+            ♡ anne's photobooth ♡
+        </h1>
+
+
+        <!-- STRIP COLOR -->
+
+        <p class="font4" style="
+            font-size: 20px;
+            color: #bfdde6;
+            margin-top: 25px;
+        ">
+            choose your photostrip color !
+        </p>
+
+
+        <input
+            type="color"
+            id="stripColor"
+            value="#ffffff"
+            style="
+                width: 60px;
+                height: 40px;
+                border: none;
+                cursor: pointer;
+                border-radius: 10px;
+            "
+        >
+
+        <br><br>
+
+
+        <!-- CAMERA -->
+
+        <div style="
+            position: relative;
+            display: inline-block;
+            background-color: white;
+            padding: 10px;
+            border-radius: 25px;
+        ">
+
+            <video
+                id="camera"
+                autoplay
+                playsinline
+                style="
+                    width: 500px;
+                    height: 375px;
+                    object-fit: cover;
+                    border-radius: 20px;
+                    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.25);
+                    transform: scaleX(-1);
+                    display: block;
+                "
+            ></video>
+
+
+            <!-- COUNTDOWN -->
+
+            <div
+                id="countdown"
+                style="
+                    display: none;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-size: 80px;
+                    font-weight: bold;
+                    color: white;
+                    text-shadow: 3px 3px 10px black;
+                "
+            >
+                3
+            </div>
+
+        </div>
+
+
+        <!-- PHOTO COUNTER -->
+
+        <p
+            id="counter"
+            class="font4"
+            style="
+                font-size: 20px;
+                margin-top: 20px;
+            "
+        >
+            photo 1 of 3
+        </p>
+
+
+        <!-- TAKE PHOTO BUTTON -->
+
+        <button
+            id="takeButton"
+            class="font4"
+            onclick="startCountdown()"
+            style="
+                padding: 12px 25px;
+                border: none;
+                border-radius: 20px;
+                background-color: #bfdde6;
+                color: white;
+                font-size: 18px;
+                cursor: pointer;
+            "
+        >
+            take photo
+        </button>
+
+
+        <!-- RETAKE BUTTON -->
+
+        <button
+            id="resetButton"
+            class="font4"
+            onclick="resetPhotos()"
+            style="
+                display: none;
+                padding: 12px 25px;
+                border: none;
+                border-radius: 20px;
+                background-color: #e8b6c8;
+                color: white;
+                font-size: 18px;
+                cursor: pointer;
+            "
+        >
+            ↻ retake
+        </button>
+
+
+        <!-- HIDDEN CANVAS -->
+
+        <canvas
+            id="canvas"
+            style="display: none;"
+        ></canvas>
+
+
+        <!-- PHOTO STRIP -->
+
+        <div style="
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            background-color: white;
+            border-radius: 20px;
+        ">
+
+            <canvas
+                id="photoStrip"
+                style="
+                    display: none;
+                    width: 260px;
+                    height: 780px;
+                    background-color: white;
+                    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
+                    border-radius: 15px;
+                "
+            ></canvas>
+
+        </div>
+
+
+        <!-- SAVE BUTTON -->
+
+        <br>
+
+        <button
+            id="saveButton"
+            class="font4"
+            onclick="saveStrip()"
+            style="
+                display: none;
+                padding: 12px 25px;
+                border: none;
+                border-radius: 20px;
+                background-color: #bfdde6;
+                color: white;
+                font-size: 18px;
+                cursor: pointer;
+            "
+        >
+             save photostrip
+        </button>
+
+
+    </div>
+
+</section>
+
+
+
+    <!-- PHOTOBOOTH JAVASCRIPT -->
+    <script>
+    
+
+        const video =
+            document.getElementById("camera");
+
+        const canvas =
+            document.getElementById("canvas");
+
+        const photoStrip =
+            document.getElementById("photoStrip");
+
+        const takeButton =
+            document.getElementById("takeButton");
+
+        const saveButton =
+            document.getElementById("saveButton");
+
+        const resetButton =
+            document.getElementById("resetButton");
+
+        const counter =
+            document.getElementById("counter");
+
+        const countdown =
+            document.getElementById("countdown");
+
+        const stripColor =
+            document.getElementById("stripColor");
+
+
+        let photos = [];
+
+
+
+        /* =========================
+           TURN ON CAMERA
+        ========================= */
+
+        navigator.mediaDevices
+            .getUserMedia({
+                video: true
+            })
+
+            .then(function(stream) {
+
+                video.srcObject = stream;
+
+            })
+
+            .catch(function(error) {
+
+                alert(
+                    "Camera access was denied or is unavailable."
+                );
+
+            });
+
+
+
+        /* =========================
+           START COUNTDOWN
+        ========================= */
+
+        function startCountdown() {
+
+
+            if (photos.length >= 3) {
+
+                return;
+
+            }
+
+
+            takeButton.disabled = true;
+
+
+            countdown.style.display =
+                "block";
+
+
+            let number = 3;
+
+
+            countdown.innerHTML =
+                number;
+
+
+
+            let timer =
+                setInterval(function() {
+
+
+                    number--;
+
+
+                    if (number > 0) {
+
+                        countdown.innerHTML =
+                            number;
+
+                    }
+
+                    else {
+
+                        countdown.innerHTML =
+                            "📸";
+
+                    }
+
+
+                }, 1000);
+
+
+
+            setTimeout(function() {
+
+
+                clearInterval(timer);
+
+
+                countdown.style.display =
+                    "none";
+
+
+                takePhoto();
+
+
+                takeButton.disabled =
+                    false;
+
+
+            }, 3000);
+
+        }
+
+
+
+        /* =========================
+           TAKE PHOTO
+        ========================= */
+
+        function takePhoto() {
+
+
+            canvas.width =
+                video.videoWidth;
+
+
+            canvas.height =
+                video.videoHeight;
+
+
+            const context =
+                canvas.getContext("2d");
+
+
+            /* MIRROR PHOTO */
+
+            context.save();
+
+
+            context.translate(
+                canvas.width,
+                0
+            );
+
+
+            context.scale(
+                -1,
+                1
+            );
+
+
+            context.drawImage(
+                video,
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+
+            context.restore();
+
+
+
+            /* CREATE IMAGE */
+
+            const photo =
+                new Image();
+
+
+            photo.src =
+                canvas.toDataURL(
+                    "image/png"
+                );
+
+
+            photos.push(photo);
+
+
+
+            photo.onload =
+                function() {
+
+
+                    /* UPDATE COUNTER */
+
+                    if (photos.length < 3) {
+
+                        counter.innerHTML =
+                            "photo " +
+                            (photos.length + 1) +
+                            " of 3";
+
+                    }
+
+
+
+                    /* AFTER 3 PHOTOS */
+
+                    if (photos.length === 3) {
+
+
+                        createPhotoStrip();
+
+
+                        counter.innerHTML =
+                            " your photostrip is ready!";
+
+
+                        takeButton.style.display =
+                            "none";
+
+
+                        resetButton.style.display =
+                            "inline-block";
+
+
+                        saveButton.style.display =
+                            "inline-block";
+
+                    }
+
+                };
+
+        }
+
+
+
+        /* =========================
+           DRAW IMAGE WITHOUT
+           STRETCHING
+        ========================= */
+
+        function drawCoverImage(
+            ctx,
+            image,
+            x,
+            y,
+            width,
+            height
+        ) {
+
+
+            const imageRatio =
+                image.width /
+                image.height;
+
+
+            const boxRatio =
+                width /
+                height;
+
+
+            let sourceWidth =
+                image.width;
+
+
+            let sourceHeight =
+                image.height;
+
+
+            let sourceX = 0;
+
+
+            let sourceY = 0;
+
+
+
+            /* CROP SIDES */
+
+            if (imageRatio > boxRatio) {
+
+
+                sourceWidth =
+                    image.height *
+                    boxRatio;
+
+
+                sourceX =
+                    (
+                        image.width -
+                        sourceWidth
+                    ) / 2;
+
+            }
+
+
+
+            /* CROP TOP/BOTTOM */
+
+            else if (
+                imageRatio < boxRatio
+            ) {
+
+
+                sourceHeight =
+                    image.width /
+                    boxRatio;
+
+
+                sourceY =
+                    (
+                        image.height -
+                        sourceHeight
+                    ) / 2;
+
+            }
+
+
+
+            /* DRAW */
+
+            ctx.drawImage(
+
+                image,
+
+                sourceX,
+                sourceY,
+
+                sourceWidth,
+                sourceHeight,
+
+                x,
+                y,
+
+                width,
+                height
+
+            );
+
+        }
+
+
+
+        /* =========================
+           CREATE 600 × 1800 STRIP
+        ========================= */
+
+        function createPhotoStrip() {
+
+
+            const width =
+                600;
+
+
+            const height =
+                1800;
+
+
+
+            /* PHOTO SPACING */
+
+            const sidePadding =
+                30;
+
+
+            const topPadding =
+                30;
+
+
+            const gap =
+                20;
+
+
+            const photoWidth =
+                width -
+                (sidePadding * 2);
+
+
+            const photoHeight =
+                530;
+
+
+
+            /* SET REAL CANVAS SIZE */
+
+            photoStrip.width =
+                width;
+
+
+            photoStrip.height =
+                height;
+
+
+
+            const ctx =
+                photoStrip.getContext(
+                    "2d"
+                );
+
+
+
+            /* CHOSEN STRIP COLOR */
+
+            const color =
+                stripColor.value;
+
+
+            ctx.fillStyle =
+                color;
+
+
+            ctx.fillRect(
+                0,
+                0,
+                width,
+                height
+            );
+
+
+
+            /* DRAW 3 PHOTOS */
+
+            for (
+                let i = 0;
+                i < 3;
+                i++
+            ) {
+
+
+                const y =
+                    topPadding +
+                    (
+                        i *
+                        (
+                            photoHeight +
+                            gap
+                        )
+                    );
+
+
+
+                drawCoverImage(
+
+                    ctx,
+
+                    photos[i],
+
+                    sidePadding,
+
+                    y,
+
+                    photoWidth,
+
+                    photoHeight
+
+                );
+
+            }
+
+    /* CUTE OBLONG BACKGROUND */
+
+        ctx.fillStyle = "#f6c8dd";
+
+        /* rounded oblong */
+        ctx.beginPath();
+
+        ctx.roundRect(
+            width / 2 - 230,   // left
+            height - 115,      // top
+            460,               // width
+            65,                // height
+            35                 // roundness
+        );
+
+        ctx.fill();
+
+
+        /* TEXT */
+
+            ctx.fillStyle = "#ffffff";
+
+            ctx.font =
+                "bold 40px 'Aston Script'";
+
+            ctx.textAlign =
+                "center";
+
+            ctx.fillText(
+
+                "𑣲⋆｡˚anne's photobooth",
+
+                width / 2,
+
+                height - 60
+
+            );
+            /* SHOW STRIP */
+
+            photoStrip.style.display =
+                "block";
+
+        }
+
+
+        /* =========================
+           CHANGE STRIP COLOR
+        ========================= */
+
+        stripColor.addEventListener(
+            "input",
+            function() {
+
+
+                if (photos.length === 3) {
+
+                    createPhotoStrip();
+
+                }
+
+            }
+        );
+
+
+
+        /* =========================
+           SAVE PHOTO STRIP
+        ========================= */
+
+        function saveStrip() {
+
+
+            const link =
+                document.createElement("a");
+
+
+            link.download =
+                "annes-photostrip-600x1800.png";
+
+
+            link.href =
+                photoStrip.toDataURL(
+                    "image/png"
+                );
+
+
+            link.click();
+
+        }
+
+
+
+        /* =========================
+           RETAKE PHOTOS
+        ========================= */
+
+        function resetPhotos() {
+
+
+            photos = [];
+
+
+            photoStrip.style.display =
+                "none";
+
+
+            saveButton.style.display =
+                "none";
+
+
+            resetButton.style.display =
+                "none";
+
+
+            takeButton.style.display =
+                "inline-block";
+
+
+            takeButton.disabled =
+                false;
+
+
+            counter.innerHTML =
+                "photo 1 of 3";
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>

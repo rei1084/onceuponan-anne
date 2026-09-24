@@ -1,0 +1,392 @@
+<head>
+    <title>Anne's Autobiography</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+
+    <style>
+        body {
+            margin: 0;
+            background-color: #fff6d5;
+        }
+
+        .about-section {
+            background-color: #fff6d5;
+            padding-bottom: 50px;
+            border-bottom: 12px solid white;
+        }
+
+        .next-section {
+            background-color: #ffffff;
+            padding-bottom: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- FALLING POLKA DOTS -->
+<div class="polka-container">
+
+    <span class="polka blue"></span>
+    <span class="polka white"></span>
+    <span class="polka blue"></span>
+    <span class="polka white"></span>
+    <span class="polka blue"></span>
+    <span class="polka white"></span>
+    <span class="polka blue"></span>
+    <span class="polka white"></span>
+    <span class="polka blue"></span>
+    <span class="polka white"></span>
+    <span class="polka blue"></span>
+    <span class="polka white"></span>
+    <span class="polka blue"></span>
+    <span class="polka white"></span>
+    <span class="polka blue"></span>
+
+</div>
+
+<style>
+
+.polka-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 999;
+}
+
+.polka {
+    position: absolute;
+    top: -25px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    animation: fall 8s linear infinite;
+}
+
+.blue {
+    background-color: #bfdde6;
+}
+
+.white {
+    background-color: white;
+}
+
+.polka:nth-child(1) { left: 5%; animation-delay: 0s; }
+.polka:nth-child(2) { left: 12%; animation-delay: 2s; }
+.polka:nth-child(3) { left: 20%; animation-delay: 4s; }
+.polka:nth-child(4) { left: 28%; animation-delay: 1s; }
+.polka:nth-child(5) { left: 35%; animation-delay: 3s; }
+.polka:nth-child(6) { left: 43%; animation-delay: 5s; }
+.polka:nth-child(7) { left: 50%; animation-delay: 0.5s; }
+.polka:nth-child(8) { left: 58%; animation-delay: 3.5s; }
+.polka:nth-child(9) { left: 65%; animation-delay: 1.5s; }
+.polka:nth-child(10) { left: 72%; animation-delay: 4.5s; }
+.polka:nth-child(11) { left: 79%; animation-delay: 2.5s; }
+.polka:nth-child(12) { left: 85%; animation-delay: 5.5s; }
+.polka:nth-child(13) { left: 91%; animation-delay: 1s; }
+.polka:nth-child(14) { left: 96%; animation-delay: 4s; }
+.polka:nth-child(15) { left: 25%; animation-delay: 6s; }
+
+@keyframes fall {
+
+    0% {
+        transform: translateY(-25px) translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateY(50vh) translateX(30px);
+    }
+
+    100% {
+        transform: translateY(110vh) translateX(-30px);
+        opacity: 0;
+    }
+
+}
+
+</style>
+
+
+    <header>
+        <div class="header">
+
+            <div class="header-Left">
+                <a href="index.html" class="logo">about me</a>
+            </div>
+
+            <div class="header-Right">
+                <a href="services.html">photobooth</a>
+                <a class="active" href="about.html">about me</a>
+                <a href="index.html">home</a>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- YELLOW ABOUT ME SECTION -->
+    <section class="about-section">
+
+        <h1 style="
+            text-align: left;
+            margin-left: 1in;
+            padding-top: 80px;
+            margin-bottom: 5px;
+        ">
+            <span class="font4" style="color: #bfdde6;">
+                about me !
+            </span>
+        </h1>
+
+
+        <div style="
+            display: flex;
+            align-items: flex-start;
+            margin-left: 1in;
+            margin-right: 1in;
+        ">
+
+            <p class="font4" style="
+                text-align: justify;
+                margin: 0;
+                font-size: 23px;
+                width: 600px;
+                flex-shrink: 0;
+                line-height: 1.5;
+            ">
+                ⤷ hi, i'm anne! i'm a nursing student who enjoys learning new things,
+                spending time with the people i care about, and finding little things
+                that make everyday life more enjoyable.
+
+                <br><br>
+
+                i would describe myself as someone who is curious, empathetic,
+                hardworking, and always willing to grow. i genuinely enjoy helping
+                people and understanding what they are going through, which is one
+                of the reasons why i chose nursing and hope to become a doctor someday.
+                i believe that caring for others is not only about having the right
+                knowledge and skills, but also about being able to listen, understand,
+                and make people feel seen and cared for.
+            </p>
+
+
+            <img src="photos/digicam.png"
+                style="
+                    width: 700px;
+                    height: 600px;
+                    object-fit: cover;
+                    margin-left: 100px;
+                    margin-top: -100px;
+                    flex-shrink: 0;
+                ">
+
+        </div>
+
+    </section>
+
+
+    <!-- WHITE NEXT SECTION -->
+    <section class="next-section" style="
+        position: relative;
+        min-height: 700px;
+    ">
+
+        <!-- LEFT TEXT -->
+        <div style="
+            position: absolute;
+            left: 1in;
+            top: 80px;
+            width: 500px;
+        ">
+            <p class="font4" style="
+                font-size: 25px;
+                line-height: 1.5;
+                margin: 0;
+            ">
+                here are some of the things i enjoy doing
+                during my free time:
+            </p>
+        </div>
+
+
+        <!-- RIGHT TEXT -->
+        <h1 style="
+            position: absolute;
+            right: 1in;
+            top: 80px;
+            margin: 0;
+        ">
+            <span class="font4">
+                hobbies !
+            </span>
+        </h1>
+
+
+<!-- PICTURES -->
+<div style="
+    padding-top: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 60px;
+    width: 100%;
+">
+
+    <!-- PICTURE 1 -->
+    <div style="
+        text-align: center;
+        animation: appear 1s ease forwards;
+        opacity: 0;
+    ">
+        <img src="photos/1.png"
+            alt="Picture 1"
+            style="
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+                margin: 0;
+                box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.25);
+                border-radius: 20px;
+            ">
+
+        <p class="font4" style="
+            font-size: 20px;
+            margin-top: 15px;
+        ">
+            matcha hopping
+        </p>
+    </div>
+
+
+    <!-- PICTURE 2 -->
+    <div style="
+        text-align: center;
+        animation: appear 1s ease 0.3s forwards;
+        opacity: 0;
+    ">
+        <img src="photos/2.png"
+            alt="Picture 2"
+            style="
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+                margin: 0;
+                box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.25);
+                border-radius: 20px;
+            ">
+
+        <p class="font4" style="
+            font-size: 20px;
+            margin-top: 15px;
+        ">
+            taking pola pics
+        </p>
+    </div>
+
+
+    <!-- PICTURE 3 -->
+    <div style="
+        text-align: center;
+        animation: appear 1s ease 0.6s forwards;
+        opacity: 0;
+    ">
+        <img src="photos/3.png"
+            alt="Picture 3"
+            style="
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+                margin: 0;
+                box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.25);
+                border-radius: 20px;
+            ">
+
+        <p class="font4" style="
+            font-size: 20px;
+            margin-top: 15px;
+        ">
+            listening to music
+        </p>
+    </div>
+
+
+    <!-- PICTURE 4 -->
+    <div style="
+        text-align: center;
+        animation: appear 1s ease 0.9s forwards;
+        opacity: 0;
+    ">
+        <img src="photos/4.png"
+            alt="Picture 4"
+            style="
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+                margin: 0;
+                box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.25);
+                border-radius: 20px;
+            ">
+
+        <p class="font4" style="
+            font-size: 20px;
+            margin-top: 15px;
+        ">
+            reading books
+        </p>
+    </div>
+
+
+    <!-- PICTURE 5 -->
+    <div style="
+        text-align: center;
+        animation: appear 1s ease 1.2s forwards;
+        opacity: 0;
+    ">
+        <img src="photos/5.png"
+            alt="Picture 5"
+            style="
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+                margin: 0;
+                box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.25);
+                border-radius: 20px;
+            ">
+
+        <p class="font4" style="
+            font-size: 20px;
+            margin-top: 15px;
+        ">
+            watching series/movies
+        </p>
+    </div>
+
+</div>
+
+
+<style>
+    @keyframes appear {
+        from {
+            opacity: 0;
+            transform: translateY(40px) scale(0.9);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+</style>
+
+
+</body>
+
